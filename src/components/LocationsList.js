@@ -50,7 +50,6 @@ const LocationsList = ({ locationsData }) => {
 
   const updateModalCard = (id) => {
     const element = cardsList.find((card) => +card.key === id);
-    console.log(element);
     const modalCard = (
       <LocationCard
         key={element.props.id}
@@ -58,11 +57,11 @@ const LocationsList = ({ locationsData }) => {
         name={element.props.name}
         userCount={element.props.userCount}
         createdAt={element.props.createdAt}
-        views={element.props.views}
+        views={componentsViews[id]}
         description={element.props.description}
         htmlTag="div"
-        onCardClick={onCardClick}
         modalActive={true}
+        onButtonClick={closeModal}
       />
     );
 
@@ -92,7 +91,7 @@ const LocationsList = ({ locationsData }) => {
   return (
     <Fragment>
       <List>{cardsList}</List>
-      {modalCard && <Modal card={modalCard} onButtonClick={closeModal}></Modal>}
+      {modalCard && <Modal card={modalCard}></Modal>}
     </Fragment>
   );
 };
