@@ -3,6 +3,24 @@ import LocationCard from "../components/LocationCard";
 import { Fragment, useState } from "react";
 import Modal from "./Modal";
 
+const dateOptions = { hour12: true, hour: "2-digit", minute: "2-digit" };
+
+// Formats fetched date to format: h:mmAM/PM
+const formatDate = (createdAt) => {
+  const newDate = new Date(createdAt);
+
+  let formattedTime = newDate
+    .toLocaleTimeString("en-US", dateOptions)
+    .split(" ")
+    .join("")
+    .toLowerCase();
+
+  formattedTime =
+    formattedTime[0] === "0" ? formattedTime.substring(1) : formattedTime;
+
+  return formattedTime;
+};
+
 const List = styled.ul`
   padding: 2rem 2rem;
   display: flex;
@@ -11,29 +29,15 @@ const List = styled.ul`
 `;
 
 const LocationsList = ({ locationsData }) => {
-  const dateOptions = { hour12: true, hour: "2-digit", minute: "2-digit" };
-
-  const formatDate = (createdAt) => {
-    const newDate = new Date(createdAt);
-
-    let formattedTime = newDate
-      .toLocaleTimeString("en-US", dateOptions)
-      .split(" ")
-      .join("")
-      .toLowerCase();
-
-    formattedTime =
-      formattedTime[0] === "0" ? formattedTime.substring(1) : formattedTime;
-
-    return formattedTime;
-  };
-
   const [clickedCard, setClickedCard] = useState("");
   const [modalActive, setModalActive] = useState(false);
 
-  const onCardClick = (id) => {
+  const toggleModal = () => {
     setModalActive((prevState) => !prevState);
+  };
 
+  const onCardClick = (id) => {
+    toggleModal();
     setClickedCard(--id);
   };
 
@@ -65,7 +69,7 @@ const LocationsList = ({ locationsData }) => {
           userCount={locationsData[clickedCard].userCount}
           createdAt={formatDate(locationsData[clickedCard].createdAt)}
           description={locationsData[clickedCard].description}
-          onClick={setModalActive}
+          onCardClick={toggleModal}
         />
       )}
     </Fragment>
