@@ -5,9 +5,8 @@ import { ReactComponent as ViewsSvg } from "../assets/Views.svg";
 
 const Card = styled.li`
   background-color: whitesmoke;
-  border: 1px solid black;
-  width: 250px;
-  margin-top: 2rem;
+  border: 1px solid lightgray;
+  width: 220px;
   padding: 1rem 1.5rem;
 `;
 

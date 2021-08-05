@@ -2,9 +2,9 @@ import styled from "styled-components";
 import LocationCard from "../components/LocationCard";
 
 const List = styled.ul`
-  padding: 0 3rem;
+  padding: 2rem 2rem;
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
 `;
 
