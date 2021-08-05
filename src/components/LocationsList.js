@@ -69,7 +69,7 @@ const LocationsList = ({ locationsData }) => {
           userCount={locationsData[clickedCard].userCount}
           createdAt={formatDate(locationsData[clickedCard].createdAt)}
           description={locationsData[clickedCard].description}
-          onCardClick={toggleModal}
+          onButtonClick={toggleModal}
         />
       )}
     </Fragment>

@@ -42,7 +42,11 @@ const LocationCard = ({
 }) => {
   return (
     //Render as li if used inside AllLocations component , or as a div if part of modal component
-    <Card as={htmlTag} role="" onClick={() => onCardClick(id)}>
+    <Card
+      as={htmlTag}
+      role=""
+      onClick={onCardClick ? () => onCardClick(id) : undefined}
+    >
       <CardTitle> {name} </CardTitle>
       <SvgParagraph>
         <UsersSvg />

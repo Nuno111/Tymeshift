@@ -44,7 +44,7 @@ const Modal = ({
   userCount,
   createdAt,
   description,
-  onCardClick,
+  onButtonClick,
 }) => {
   // To avoid recreating the same LocationCard component to render a bit more content, extra tags are displayed based on props.
   const extraElements = (
@@ -52,7 +52,7 @@ const Modal = ({
       <ExtraTitle>Description</ExtraTitle>
       <p>{description}</p>
       <ExtraButton>
-        <button onClick={onCardClick}>Done</button>
+        <button onClick={onButtonClick}>Done</button>
       </ExtraButton>
     </Fragment>
   );
