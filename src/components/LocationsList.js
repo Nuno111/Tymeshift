@@ -31,49 +31,51 @@ const List = styled.ul`
 const LocationsList = ({ locationsData }) => {
   // This can probably be optimzed instead of having X eventClickers to update modal data
   //I would like to have just one eventClicker on the ul and take advantage of event bubbling
-  const [clickedCard, setClickedCard] = useState("");
-  const [modalActive, setModalActive] = useState(false);
-  const [viewsCounter, setViewsCounter] = useState(0);
+  const [modalCard, setModalCard] = useState(undefined);
+  const [componentsViews, setComponentsViews] = useState(
+    Array(locationsData.length).fill(0)
+  );
 
-  const toggleModal = () => {
-    setModalActive((prevState) => !prevState);
+  const updateComponentsViews = (id) => {
+    setComponentsViews((prevState) => (prevState[id] += 1));
   };
 
   const onCardClick = (id) => {
-    toggleModal();
-    setClickedCard(--id);
+    updateComponentsViews(--id);
+    updateModalCard(--id);
   };
+
+  const updateModalCard = (id) => {
+    const modalCard = cardsList.find((card) => card.key === id);
+
+    setModalCard(modalCard);
+  };
+
+  const closeModal = () => setModalCard(undefined);
+
+  const cardsList = locationsData.map(
+    ({ id, name, userCount, createdAt, description }) => {
+      return (
+        <LocationCard
+          key={id}
+          id={id}
+          name={name}
+          userCount={userCount}
+          createdAt={formatDate(createdAt)}
+          views={componentsViews[id]}
+          description={description}
+          htmlTag="li"
+          onCardClick={onCardClick}
+          modalActive={false}
+        />
+      );
+    }
+  );
 
   return (
     <Fragment>
-      <List>
-        {locationsData.map(
-          ({ id, name, userCount, createdAt, description }) => {
-            return (
-              <LocationCard
-                key={id}
-                id={id}
-                name={name}
-                userCount={userCount}
-                createdAt={formatDate(createdAt)}
-                description={description}
-                htmlTag="li"
-                onCardClick={onCardClick}
-              />
-            );
-          }
-        )}
-      </List>
-      {modalActive && (
-        <Modal
-          id={locationsData[clickedCard].id}
-          name={locationsData[clickedCard].name}
-          userCount={locationsData[clickedCard].userCount}
-          createdAt={formatDate(locationsData[clickedCard].createdAt)}
-          description={locationsData[clickedCard].description}
-          onButtonClick={toggleModal}
-        />
-      )}
+      <List>{cardsList}</List>
+      {modalCard && <Modal card={modalCard} onButtonClick={closeModal}></Modal>}
     </Fragment>
   );
 };

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { ReactComponent as UsersSvg } from "../assets/Users.svg";
 import { ReactComponent as TimezoneSvg } from "../assets/Timezone.svg";
 import { ReactComponent as ViewsSvg } from "../assets/Views.svg";
@@ -29,14 +29,34 @@ const SvgParagraph = styled.div`
   }
 `;
 
+const ExtraTitle = styled.div`
+  padding-top: 1rem;
+`;
+
+const ExtraButton = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    background-color: green;
+    border-radius: 5rem;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+  }
+`;
+
 const LocationCard = ({
   id,
   name,
   userCount,
   createdAt,
   htmlTag,
-  extraElements,
+  description,
   onCardClick,
+  onButtonClick,
+  modalActive,
 }) => {
   const [clickCounter, setClickCounter] = useState(0);
 
@@ -71,7 +91,15 @@ const LocationCard = ({
         <ViewsSvg />
         <p>{clickCounter} Views</p>
       </SvgParagraph>
-      {extraElements}
+      {modalActive && (
+        <Fragment>
+          <ExtraTitle>Description</ExtraTitle>
+          <p>{description}</p>
+          <ExtraButton>
+            <button onClick={onButtonClick}>Done</button>
+          </ExtraButton>
+        </Fragment>
+      )}
     </Card>
   );
 };

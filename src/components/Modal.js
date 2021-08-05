@@ -20,58 +20,13 @@ const CenteredCard = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const ExtraTitle = styled.div`
-  padding-top: 1rem;
-`;
-
-const ExtraButton = styled.div`
-  display: flex;
-  justify-content: flex-end;
-
-  button {
-    background-color: green;
-    border-radius: 5rem;
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    cursor: pointer;
-  }
-`;
-
-const Modal = ({
-  id,
-  name,
-  userCount,
-  createdAt,
-  description,
-  onButtonClick,
-}) => {
-  const extraElements = (
-    <Fragment>
-      <ExtraTitle>Description</ExtraTitle>
-      <p>{description}</p>
-      <ExtraButton>
-        <button onClick={onButtonClick}>Done</button>
-      </ExtraButton>
-    </Fragment>
-  );
-
+const Modal = ({ card }) => {
   // Need to improve accessibility here
   return (
     <Fragment>
       {ReactDOM.createPortal(
         <ModalOverlay>
-          <CenteredCard>
-            <LocationCard
-              key={id}
-              name={name}
-              userCount={userCount}
-              createdAt={createdAt}
-              description={description}
-              htmlTag="div"
-              extraElements={extraElements}
-            />
-          </CenteredCard>
+          <CenteredCard>{card}</CenteredCard>
         </ModalOverlay>,
         document.getElementById("modal")
       )}
