@@ -1,11 +1,12 @@
 import { Fragment } from "react";
 import { Reset } from "styled-reset";
+import AllLocations from "./pages/AllLocations";
 
 function App() {
   return (
     <Fragment>
       <Reset />
-      <h1>Hello world</h1>
+      <AllLocations />
     </Fragment>
   );
 }
