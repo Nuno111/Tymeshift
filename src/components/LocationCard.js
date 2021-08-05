@@ -4,7 +4,8 @@ import { ReactComponent as UsersSvg } from "../assets/Users.svg";
 import { ReactComponent as TimezoneSvg } from "../assets/Timezone.svg";
 import { ReactComponent as ViewsSvg } from "../assets/Views.svg";
 
-const Card = styled.li`
+// If part of modal render as div otherwise render as li element
+const Card = styled.div`
   background-color: whitesmoke;
   border: 1px solid lightgray;
   width: 220px;
@@ -29,9 +30,10 @@ const SvgParagraph = styled.div`
   }
 `;
 
-const LocationCard = ({ name, userCount, createdAt, views }) => {
+const LocationCard = ({ name, userCount, createdAt, views, htmlTag }) => {
   return (
-    <Card role="">
+    //Render as li if used inside AllLocations component , or as a div if part of modal component
+    <Card as={htmlTag} role="">
       <CardTitle> {name} </CardTitle>
       <SvgParagraph>
         <UsersSvg />
