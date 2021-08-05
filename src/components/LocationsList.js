@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import LocationCard from "../components/LocationCard";
+import { useState } from "react";
 
 const List = styled.ul`
   padding: 2rem 2rem;

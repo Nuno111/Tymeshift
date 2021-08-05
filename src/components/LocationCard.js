@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as UsersSvg } from "../assets/Users.svg";
 import { ReactComponent as TimezoneSvg } from "../assets/Timezone.svg";
@@ -30,7 +31,7 @@ const SvgParagraph = styled.div`
 
 const LocationCard = ({ name, userCount, createdAt, views }) => {
   return (
-    <Card>
+    <Card role="">
       <CardTitle> {name} </CardTitle>
       <SvgParagraph>
         <UsersSvg />
