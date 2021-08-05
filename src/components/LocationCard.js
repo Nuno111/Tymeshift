@@ -52,31 +52,19 @@ const LocationCard = ({
   name,
   userCount,
   createdAt,
+  views,
   htmlTag,
   description,
   onCardClick,
   onButtonClick,
   modalActive,
 }) => {
-  const [clickCounter, setClickCounter] = useState(0);
-
-  const updateCounter = () => {
-    setClickCounter((prevState) => (prevState += 1));
-  };
-
   return (
     // Accessibility needs to be optimized
     <Card
       as={htmlTag}
       role=""
-      onClick={
-        onCardClick
-          ? () => {
-              onCardClick(id);
-              updateCounter();
-            }
-          : undefined
-      }
+      onClick={onCardClick ? () => onCardClick(id) : undefined}
     >
       <CardTitle> {name} </CardTitle>
       <SvgParagraph>
@@ -89,7 +77,7 @@ const LocationCard = ({
       </SvgParagraph>
       <SvgParagraph>
         <ViewsSvg />
-        <p>{clickCounter} Views</p>
+        <p>{views} Views</p>
       </SvgParagraph>
       {modalActive && (
         <Fragment>

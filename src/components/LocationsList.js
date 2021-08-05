@@ -33,15 +33,18 @@ const LocationsList = ({ locationsData }) => {
   //I would like to have just one eventClicker on the ul and take advantage of event bubbling
   const [modalCard, setModalCard] = useState(undefined);
   const [componentsViews, setComponentsViews] = useState(
-    Array(locationsData.length).fill(0)
+    new Array(locationsData.length).fill(0)
   );
 
+  // Only updates the corresponding clicked card views.
   const updateComponentsViews = (id) => {
-    setComponentsViews((prevState) => (prevState[id] += 1));
+    setComponentsViews(
+      componentsViews.map((comp, index) => (index === id ? (comp += 1) : comp))
+    );
   };
 
   const onCardClick = (id) => {
-    updateComponentsViews(--id);
+    updateComponentsViews(+id);
     updateModalCard(--id);
   };
 
