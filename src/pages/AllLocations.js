@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import LocationCard from "../components/LocationCard";
 
 const Container = styled.main`
   max-width: 1536px;
@@ -8,15 +9,21 @@ const Container = styled.main`
 
 const Header = styled.header`
   border-bottom: 1px lightgray solid;
-  padding: 1rem 0;
+  padding: 1rem;
 `;
 const PageTitle = styled.h2`
   color: grey;
+  padding-bottom: 0.5rem;
 `;
 
 const PageSubTitle = styled.p`
   color: black;
   font-size: 1.5rem;
+  font-weight: bold;
+`;
+
+const List = styled.ul`
+  padding: 0 3rem;
 `;
 
 const AllLocations = () => {
@@ -28,6 +35,18 @@ const AllLocations = () => {
           <PageSubTitle>Acme Locations</PageSubTitle>
         </Container>
       </Header>
+      <section>
+        <Container>
+          <List>
+            <LocationCard
+              name="Acme HQ"
+              userCount="114"
+              createdAt="2:32pm (GMT+01:00)"
+              views="5"
+            />
+          </List>
+        </Container>
+      </section>
     </main>
   );
 };
