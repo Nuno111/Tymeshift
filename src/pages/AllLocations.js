@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import LocationCard from "../components/LocationCard";
 
@@ -27,6 +29,18 @@ const List = styled.ul`
 `;
 
 const AllLocations = () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      const resp = await axios.get(
+        "https://6033c4d8843b15001793194e.mockapi.io/api/locations"
+      );
+
+      console.log(resp);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <main>
       <Header>
