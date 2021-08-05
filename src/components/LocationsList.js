@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import LocationCard from "../components/LocationCard";
+import { useState } from "react";
 
 const List = styled.ul`
   padding: 2rem 2rem;
@@ -8,15 +9,17 @@ const List = styled.ul`
   flex-wrap: wrap;
 `;
 
-const dateOptions = { hour12: true, hour: "2-digit", minute: "2-digit" };
-
 const LocationsList = ({ locationsData }) => {
-  const onCardClick = (e) => {
-    console.log(e.target);
+  const dateOptions = { hour12: true, hour: "2-digit", minute: "2-digit" };
+
+  const [clickedCard, setClickedCard] = useState("");
+
+  const onCardClick = (id) => {
+    setClickedCard(id);
   };
 
   return (
-    <List onClick={onCardClick}>
+    <List>
       {locationsData.map(({ id, name, userCount, createdAt, description }) => {
         const newDate = new Date(createdAt);
 
@@ -31,6 +34,7 @@ const LocationsList = ({ locationsData }) => {
 
         return (
           <LocationCard
+            id={id}
             key={id}
             name={name}
             userCount={userCount}
@@ -38,6 +42,7 @@ const LocationsList = ({ locationsData }) => {
             description={description}
             views="5"
             htmlTag="li"
+            onCardClick={onCardClick}
           />
         );
       })}

@@ -31,16 +31,18 @@ const SvgParagraph = styled.div`
 `;
 
 const LocationCard = ({
+  id,
   name,
   userCount,
   createdAt,
   views,
   htmlTag,
   extraElements,
+  onCardClick,
 }) => {
   return (
     //Render as li if used inside AllLocations component , or as a div if part of modal component
-    <Card as={htmlTag} role="">
+    <Card as={htmlTag} role="" onClick={() => onCardClick(id)}>
       <CardTitle> {name} </CardTitle>
       <SvgParagraph>
         <UsersSvg />
