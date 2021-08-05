@@ -6,13 +6,13 @@ import { ReactComponent as ViewsSvg } from "../assets/Views.svg";
 const Card = styled.li`
   background-color: whitesmoke;
   border: 1px solid black;
-  width: 300px;
+  width: 250px;
   margin-top: 2rem;
   padding: 1rem 1.5rem;
 `;
 
 const CardTitle = styled.p`
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: bold;
   padding-bottom: 1rem;
 `;
