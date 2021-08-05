@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
-import LocationCard from "../components/LocationCard";
+import LocationsList from "../components/LocationsList";
 
 const Container = styled.main`
   max-width: 1536px;
@@ -24,17 +24,9 @@ const PageSubTitle = styled.p`
   font-weight: bold;
 `;
 
-const List = styled.ul`
-  padding: 0 3rem;
-  display: flex;
-  gap: 2rem;
-  flex-wrap: wrap;
-`;
-
 const AllLocations = () => {
   const [locationsData, setLocationsData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const dateOptions = { hour12: true, hour: "2-digit", minute: "2-digit" };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,11 +41,6 @@ const AllLocations = () => {
     fetchData();
   }, []);
 
-  console.log(locationsData);
-  if (!loading) {
-    console.log(new Date(locationsData[0].createdAt));
-  }
-
   return (
     <main>
       <Header>
@@ -65,35 +52,7 @@ const AllLocations = () => {
       <section>
         <Container>
           {loading && <p>Please wait while the data loads</p>}
-          {!loading && (
-            <List>
-              {locationsData.map(
-                ({ id, name, userCount, createdAt, description }) => {
-                  let formattedTime = new Date(createdAt)
-                    .toLocaleTimeString("en-US", dateOptions)
-                    .split(" ")
-                    .join("")
-                    .toLowerCase();
-
-                  formattedTime =
-                    formattedTime[0] === "0"
-                      ? formattedTime.substring(1)
-                      : formattedTime;
-
-                  return (
-                    <LocationCard
-                      key={id}
-                      name={name}
-                      userCount={userCount}
-                      createdAt={formattedTime}
-                      description={description}
-                      views="5"
-                    />
-                  );
-                }
-              )}
-            </List>
-          )}
+          {!loading && <LocationsList locationsData={locationsData} />}
         </Container>
       </section>
     </main>
