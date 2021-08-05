@@ -38,14 +38,7 @@ const ExtraButton = styled.div`
   }
 `;
 
-const Modal = ({
-  id,
-  name,
-  userCount,
-  formattedTime,
-  description,
-  onClick,
-}) => {
+const Modal = ({ id, name, userCount, createdAt, description, onClick }) => {
   // To avoid recreating the same LocationCard component to render a bit more content, extra tags are displayed based on props.
   const extraElements = (
     <Fragment>
@@ -67,7 +60,7 @@ const Modal = ({
               key={id}
               name={name}
               userCount={userCount}
-              createdAt={formattedTime}
+              createdAt={createdAt}
               description={description}
               views="5"
               htmlTag="div"
