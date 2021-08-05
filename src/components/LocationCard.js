@@ -1,10 +1,9 @@
-import { useState } from "react";
 import styled from "styled-components";
+import { useState } from "react";
 import { ReactComponent as UsersSvg } from "../assets/Users.svg";
 import { ReactComponent as TimezoneSvg } from "../assets/Timezone.svg";
 import { ReactComponent as ViewsSvg } from "../assets/Views.svg";
 
-// If part of modal render as div otherwise render as li element
 const Card = styled.div`
   background-color: whitesmoke;
   border: 1px solid lightgray;
@@ -35,17 +34,29 @@ const LocationCard = ({
   name,
   userCount,
   createdAt,
-  views,
   htmlTag,
   extraElements,
   onCardClick,
 }) => {
+  const [clickCounter, setClickCounter] = useState(0);
+
+  const updateCounter = () => {
+    setClickCounter((prevState) => (prevState += 1));
+  };
+
   return (
-    //Render as li if used inside AllLocations component , or as a div if part of modal component
+    // Accessibility needs to be optimized
     <Card
       as={htmlTag}
       role=""
-      onClick={onCardClick ? () => onCardClick(id) : undefined}
+      onClick={
+        onCardClick
+          ? () => {
+              onCardClick(id);
+              updateCounter();
+            }
+          : undefined
+      }
     >
       <CardTitle> {name} </CardTitle>
       <SvgParagraph>
@@ -58,7 +69,7 @@ const LocationCard = ({
       </SvgParagraph>
       <SvgParagraph>
         <ViewsSvg />
-        <p>{views} Views</p>
+        <p>{clickCounter} Views</p>
       </SvgParagraph>
       {extraElements}
     </Card>

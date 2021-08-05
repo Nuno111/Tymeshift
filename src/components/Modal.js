@@ -46,7 +46,6 @@ const Modal = ({
   description,
   onButtonClick,
 }) => {
-  // To avoid recreating the same LocationCard component to render a bit more content, extra tags are displayed based on props.
   const extraElements = (
     <Fragment>
       <ExtraTitle>Description</ExtraTitle>
@@ -57,7 +56,7 @@ const Modal = ({
     </Fragment>
   );
 
-  // Need to improve accessibility here, add some aria roles or use different html elements
+  // Need to improve accessibility here
   return (
     <Fragment>
       {ReactDOM.createPortal(
@@ -69,7 +68,6 @@ const Modal = ({
               userCount={userCount}
               createdAt={createdAt}
               description={description}
-              views="5"
               htmlTag="div"
               extraElements={extraElements}
             />

@@ -29,8 +29,11 @@ const List = styled.ul`
 `;
 
 const LocationsList = ({ locationsData }) => {
+  // This can probably be optimzed instead of having X eventClickers to update modal data
+  //I would like to have just one eventClicker on the ul and take advantage of event bubbling
   const [clickedCard, setClickedCard] = useState("");
   const [modalActive, setModalActive] = useState(false);
+  const [viewsCounter, setViewsCounter] = useState(0);
 
   const toggleModal = () => {
     setModalActive((prevState) => !prevState);
@@ -54,7 +57,6 @@ const LocationsList = ({ locationsData }) => {
                 userCount={userCount}
                 createdAt={formatDate(createdAt)}
                 description={description}
-                views="5"
                 htmlTag="li"
                 onCardClick={onCardClick}
               />
