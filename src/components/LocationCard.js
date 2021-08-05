@@ -30,7 +30,14 @@ const SvgParagraph = styled.div`
   }
 `;
 
-const LocationCard = ({ name, userCount, createdAt, views, htmlTag }) => {
+const LocationCard = ({
+  name,
+  userCount,
+  createdAt,
+  views,
+  htmlTag,
+  extraElements,
+}) => {
   return (
     //Render as li if used inside AllLocations component , or as a div if part of modal component
     <Card as={htmlTag} role="">
@@ -47,6 +54,7 @@ const LocationCard = ({ name, userCount, createdAt, views, htmlTag }) => {
         <ViewsSvg />
         <p>{views} Views</p>
       </SvgParagraph>
+      {extraElements}
     </Card>
   );
 };

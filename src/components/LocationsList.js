@@ -11,8 +11,12 @@ const List = styled.ul`
 const dateOptions = { hour12: true, hour: "2-digit", minute: "2-digit" };
 
 const LocationsList = ({ locationsData }) => {
+  const onCardClick = (e) => {
+    console.log(e.target);
+  };
+
   return (
-    <List>
+    <List onClick={onCardClick}>
       {locationsData.map(({ id, name, userCount, createdAt, description }) => {
         const newDate = new Date(createdAt);
 
