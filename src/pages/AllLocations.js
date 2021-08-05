@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import LocationCard from "../components/LocationCard";
@@ -29,17 +29,23 @@ const List = styled.ul`
 `;
 
 const AllLocations = () => {
+  const [locationsData, setLocationsData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
       const resp = await axios.get(
         "https://6033c4d8843b15001793194e.mockapi.io/api/locations"
       );
 
-      console.log(resp);
+      setLocationsData(resp.data);
+      setLoading(false);
     };
 
     fetchData();
   }, []);
+
+  console.log(locationsData);
 
   return (
     <main>
@@ -51,14 +57,25 @@ const AllLocations = () => {
       </Header>
       <section>
         <Container>
-          <List>
-            <LocationCard
-              name="Acme HQ"
-              userCount="114"
-              createdAt="2:32pm (GMT+01:00)"
-              views="5"
-            />
-          </List>
+          {loading && <p>Please wait while data loads</p>}
+          {!loading && (
+            <List>
+              {locationsData.map(
+                ({ id, name, userCount, createdAt, description }) => {
+                  return (
+                    <LocationCard
+                      key={id}
+                      name={name}
+                      userCount={userCount}
+                      createdAt={createdAt}
+                      description={description}
+                      views="5"
+                    />
+                  );
+                }
+              )}
+            </List>
+          )}
         </Container>
       </section>
     </main>
