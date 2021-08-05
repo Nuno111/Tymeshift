@@ -45,11 +45,26 @@ const LocationsList = ({ locationsData }) => {
 
   const onCardClick = (id) => {
     updateComponentsViews(+id);
-    updateModalCard(--id);
+    updateModalCard(+id);
   };
 
   const updateModalCard = (id) => {
-    const modalCard = cardsList.find((card) => card.key === id);
+    const element = cardsList.find((card) => +card.key === id);
+    console.log(element);
+    const modalCard = (
+      <LocationCard
+        key={element.props.id}
+        id={element.props.id}
+        name={element.props.name}
+        userCount={element.props.userCount}
+        createdAt={element.props.createdAt}
+        views={element.props.views}
+        description={element.props.description}
+        htmlTag="div"
+        onCardClick={onCardClick}
+        modalActive={true}
+      />
+    );
 
     setModalCard(modalCard);
   };
@@ -69,7 +84,6 @@ const LocationsList = ({ locationsData }) => {
           description={description}
           htmlTag="li"
           onCardClick={onCardClick}
-          modalActive={false}
         />
       );
     }
