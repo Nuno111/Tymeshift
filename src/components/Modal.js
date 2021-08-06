@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import LocationCard from "./LocationCard";
 
 const ModalOverlay = styled.aside`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
