@@ -12,7 +12,7 @@
                         <use xlink:href="#path-1"></use>
                     </mask>
                     <use id="Mask" fill="#FFFFFF" xlink:href="#path-1"></use>
-                    <g id="Group" mask="url(#mask-2)" fill="#001122">
+                    <g id="Group" mask="url(#mask-2)" fill="gray">
                         <g id="🎨-Color">
                             <rect id="Rectangle-2" x="0" y="0" width="16" height="16"></rect>
                         </g>

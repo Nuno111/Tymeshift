@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Fragment } from "react";
 import { ReactComponent as UsersSvg } from "../assets/Users.svg";
+import { ReactComponent as EditSvg } from "../assets/Edit.svg";
 import { ReactComponent as TimezoneSvg } from "../assets/Timezone.svg";
 import { ReactComponent as ViewsSvg } from "../assets/Views.svg";
 
@@ -12,15 +13,28 @@ const Card = styled.div`
   cursor: ${({ modalActive }) => (modalActive ? "default" : "pointer")};
 
   &:hover {
+    svg {
+      display: block;
+    }
+
     background-color: ${({ modalActive }) =>
       modalActive ? "#f9fafb" : "#e5e7eb"};
   }
 `;
 
-const CardTitle = styled.p`
-  font-size: 1.25rem;
-  font-weight: bold;
-  padding-bottom: 1rem;
+const CardTitle = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    font-size: 1.25rem;
+    font-weight: bold;
+    padding-bottom: 1rem;
+  }
+
+  svg {
+    display: none;
+  }
 `;
 
 const SvgParagraph = styled.div`
@@ -30,7 +44,6 @@ const SvgParagraph = styled.div`
   svg {
     width: 15px;
     height: 15px;
-    fill: lightgray;
     padding-right: 0.5rem;
   }
 `;
@@ -74,7 +87,10 @@ const LocationCard = ({
       onClick={onCardClick ? () => onCardClick(id) : undefined}
       modalActive={modalActive}
     >
-      <CardTitle> {name} </CardTitle>
+      <CardTitle>
+        <p>{name}</p>
+        {!modalActive && <EditSvg />}
+      </CardTitle>
       <SvgParagraph>
         <UsersSvg />
         <p>{userCount} Users</p>
