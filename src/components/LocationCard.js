@@ -9,10 +9,11 @@ const Card = styled.div`
   border: 1px solid lightgray;
   width: 250px;
   padding: 1rem 1.5rem;
-  cursor: ${(props) => (props.modalActive ? "default" : "pointer")};
+  cursor: ${({ modalActive }) => (modalActive ? "default" : "pointer")};
 
   &:hover {
-    background-color: ${(props) => (props.modalActive ? "#e5e7eb" : "#f9fafb")};
+    background-color: ${({ modalActive }) =>
+      modalActive ? "#f9fafb" : "#e5e7eb"};
   }
 `;
 
@@ -71,6 +72,7 @@ const LocationCard = ({
     <Card
       as={htmlTag}
       onClick={onCardClick ? () => onCardClick(id) : undefined}
+      modalActive={modalActive}
     >
       <CardTitle> {name} </CardTitle>
       <SvgParagraph>
