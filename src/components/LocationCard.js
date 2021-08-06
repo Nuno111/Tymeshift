@@ -5,10 +5,15 @@ import { ReactComponent as TimezoneSvg } from "../assets/Timezone.svg";
 import { ReactComponent as ViewsSvg } from "../assets/Views.svg";
 
 const Card = styled.div`
-  background-color: whitesmoke;
+  background-color: #f9fafb;
   border: 1px solid lightgray;
-  width: 220px;
+  width: 250px;
   padding: 1rem 1.5rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e5e7eb;
+  }
 `;
 
 const CardTitle = styled.p`

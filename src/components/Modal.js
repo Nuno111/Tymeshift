@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import LocationCard from "./LocationCard";
 import { Fragment } from "react";
 import ReactDOM from "react-dom";
 
