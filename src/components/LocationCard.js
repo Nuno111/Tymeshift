@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { ReactComponent as UsersSvg } from "../assets/Users.svg";
 import { ReactComponent as TimezoneSvg } from "../assets/Timezone.svg";
 import { ReactComponent as ViewsSvg } from "../assets/Views.svg";
@@ -35,12 +35,14 @@ const SvgParagraph = styled.div`
 `;
 
 const ExtraTitle = styled.div`
-  padding-top: 1rem;
+  padding: 0.5rem 0;
+  font-weight: bold;
 `;
 
 const ExtraButton = styled.div`
   display: flex;
   justify-content: flex-end;
+  margin-top: 1rem;
 
   button {
     background-color: green;

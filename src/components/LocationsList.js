@@ -68,12 +68,13 @@ const LocationsList = ({ locationsData }) => {
   const closeModal = () => setModalCard(undefined);
 
   const onCardClick = (id) => {
-    updateComponentsViews(+id);
-    updateModalCard(+id);
+    updateComponentsViews(id);
+    updateModalCard(id);
   };
 
   const cardsList = locationsData.map(
     ({ id, name, userCount, createdAt, description }) => {
+      id--;
       return (
         <LocationCard
           key={id}
