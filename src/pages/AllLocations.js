@@ -27,15 +27,21 @@ const PageSubTitle = styled.p`
 const AllLocations = () => {
   const [locationsData, setLocationsData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
-      const resp = await axios.get(
-        "https://6033c4d8843b15001793194e.mockapi.io/api/locations"
-      );
+      try {
+        const resp = await axios.get(
+          "https://6033c4d8843b15001793194e.mockapi.io/api/locations"
+        );
 
-      setLocationsData(resp.data);
-      setLoading(false);
+        setLocationsData(resp.data);
+        setLoading(false);
+      } catch (err) {
+        setError(true);
+        setLoading(false);
+      }
     };
 
     fetchData();
@@ -52,7 +58,15 @@ const AllLocations = () => {
       <section>
         <Container>
           {loading && <p>Please wait while the data loads</p>}
-          {!loading && <LocationsList locationsData={locationsData} />}
+          {!loading && error && (
+            <p>
+              Sorry, someone made a boo boo. Please contact your go to
+              Adminstrator, Mr Nunoooooo.
+            </p>
+          )}
+          {!loading && !error && (
+            <LocationsList locationsData={locationsData} />
+          )}
         </Container>
       </section>
     </main>

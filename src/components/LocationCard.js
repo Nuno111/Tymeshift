@@ -4,13 +4,19 @@ import { ReactComponent as UsersSvg } from "../assets/Users.svg";
 import { ReactComponent as EditSvg } from "../assets/Edit.svg";
 import { ReactComponent as TimezoneSvg } from "../assets/Timezone.svg";
 import { ReactComponent as ViewsSvg } from "../assets/Views.svg";
+import { ReactComponent as CloseSvg } from "../assets/Close.svg";
 
 const Card = styled.div`
   background-color: #f9fafb;
   border: 1px solid lightgray;
-  width: 250px;
+  width: ${({ modalActive }) => (modalActive ? "400px" : "250px")};
   padding: 1rem 1.5rem;
   cursor: ${({ modalActive }) => (modalActive ? "default" : "pointer")};
+
+  svg {
+    width: 15px;
+    height: 15px;
+  }
 
   &:hover {
     svg {
@@ -33,7 +39,8 @@ const CardTitle = styled.div`
   }
 
   svg {
-    display: none;
+    display: ${({ modalActive }) => (modalActive ? "block" : "none")};
+    cursor: pointer;
   }
 `;
 
@@ -66,6 +73,9 @@ const ExtraButton = styled.div`
     border: none;
     cursor: pointer;
   }
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 const LocationCard = ({
@@ -87,9 +97,10 @@ const LocationCard = ({
       onClick={onCardClick ? () => onCardClick(id) : undefined}
       modalActive={modalActive}
     >
-      <CardTitle>
+      <CardTitle modalActive={modalActive}>
         <p>{name}</p>
         {!modalActive && <EditSvg />}
+        {modalActive && <CloseSvg onClick={onButtonClick} />}
       </CardTitle>
       <SvgParagraph>
         <UsersSvg />
