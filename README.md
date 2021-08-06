@@ -10,6 +10,4 @@ npm start
 
 ## issues
 
-Got a problem with edit svg in cards when hovering, it only displays properly on the first card, must be something to do with the svg id or class
-
-First time using styled components and I didn't read the official documentation yet, so not following any best practives, and it's a bit all over the place.. More used to TailwindCSS.
+First time using styled components and I didn't read the official documentation yet, so not following any best practices here, and it's a bit all over the place..
