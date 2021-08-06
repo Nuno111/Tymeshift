@@ -3,6 +3,13 @@ import LocationCard from "../components/LocationCard";
 import { Fragment, useState } from "react";
 import Modal from "./Modal";
 
+const List = styled.ul`
+  padding: 2rem 2rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+`;
+
 const dateOptions = { hour12: true, hour: "2-digit", minute: "2-digit" };
 
 // Formats fetched date to format: h:mmAM/PM
@@ -21,19 +28,12 @@ const formatDate = (createdAt) => {
   return formattedTime;
 };
 
-const List = styled.ul`
-  padding: 2rem 2rem;
-  display: flex;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-`;
-
 const LocationsList = ({ locationsData }) => {
   // This can probably be optimzed instead of having X eventClickers to update modal data
   //I would like to have just one eventClicker on the ul and take advantage of event bubbling
   const [modalCard, setModalCard] = useState(undefined);
   const [componentsViews, setComponentsViews] = useState(
-    new Array(locationsData.length).fill(0)
+    Array(locationsData.length).fill(0)
   );
 
   // Only updates the corresponding clicked card views.
@@ -43,13 +43,9 @@ const LocationsList = ({ locationsData }) => {
     );
   };
 
-  const onCardClick = (id) => {
-    updateComponentsViews(+id);
-    updateModalCard(+id);
-  };
-
   const updateModalCard = (id) => {
     const element = cardsList.find((card) => +card.key === id);
+
     const modalCard = (
       <LocationCard
         key={element.props.id}
@@ -57,7 +53,8 @@ const LocationsList = ({ locationsData }) => {
         name={element.props.name}
         userCount={element.props.userCount}
         createdAt={element.props.createdAt}
-        views={componentsViews[id]}
+        // Having troubles with asyn state updates so i'm using a very bad hack here
+        views={++componentsViews[id]}
         description={element.props.description}
         htmlTag="div"
         modalActive={true}
@@ -69,6 +66,11 @@ const LocationsList = ({ locationsData }) => {
   };
 
   const closeModal = () => setModalCard(undefined);
+
+  const onCardClick = (id) => {
+    updateComponentsViews(+id);
+    updateModalCard(+id);
+  };
 
   const cardsList = locationsData.map(
     ({ id, name, userCount, createdAt, description }) => {
