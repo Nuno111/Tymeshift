@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Fragment } from "react";
 import ReactDOM from "react-dom";
+import LocationCard from "./LocationCard";
 
 const ModalOverlay = styled.aside`
   position: absolute;
@@ -19,13 +20,28 @@ const CenteredCard = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const Modal = ({ card }) => {
+const Modal = ({ cardsList, views, onButtonClick, id }) => {
   // Need to improve accessibility here
+  const element = cardsList[id];
+
   return (
     <Fragment>
       {ReactDOM.createPortal(
         <ModalOverlay role="dialog">
-          <CenteredCard>{card}</CenteredCard>
+          <CenteredCard>
+            <LocationCard
+              key={element.props.id}
+              id={element.props.id}
+              name={element.props.name}
+              userCount={element.props.userCount}
+              createdAt={element.props.createdAt}
+              views={views[id]}
+              description={element.props.description}
+              htmlTag="div"
+              modalActive={true}
+              onButtonClick={onButtonClick}
+            />
+          </CenteredCard>
         </ModalOverlay>,
         document.getElementById("modal")
       )}

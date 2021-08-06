@@ -31,7 +31,7 @@ const formatDate = (createdAt) => {
 const LocationsList = ({ locationsData }) => {
   // This can probably be optimzed instead of having X eventClickers to update modal data
   //I would like to have just one eventClicker on the ul and take advantage of event bubbling
-  const [modalCard, setModalCard] = useState(undefined);
+  const [cardId, setCardId] = useState(undefined);
   const [componentsViews, setComponentsViews] = useState(
     Array(locationsData.length).fill(0)
   );
@@ -43,33 +43,11 @@ const LocationsList = ({ locationsData }) => {
     );
   };
 
-  const updateModalCard = (id) => {
-    const element = cardsList.find((card) => +card.key === id);
-
-    const modalCard = (
-      <LocationCard
-        key={element.props.id}
-        id={element.props.id}
-        name={element.props.name}
-        userCount={element.props.userCount}
-        createdAt={element.props.createdAt}
-        // Having troubles with asyn state updates so i'm using a very bad hack here
-        views={++componentsViews[id]}
-        description={element.props.description}
-        htmlTag="div"
-        modalActive={true}
-        onButtonClick={closeModal}
-      />
-    );
-
-    setModalCard(modalCard);
-  };
-
-  const closeModal = () => setModalCard(undefined);
+  const closeModal = () => setCardId(undefined);
 
   const onCardClick = (id) => {
     updateComponentsViews(id);
-    updateModalCard(id);
+    setCardId(id);
   };
 
   const cardsList = locationsData.map(
@@ -94,7 +72,14 @@ const LocationsList = ({ locationsData }) => {
   return (
     <Fragment>
       <List>{cardsList}</List>
-      {modalCard && <Modal card={modalCard}></Modal>}
+      {cardId >= 0 && (
+        <Modal
+          cardsList={cardsList}
+          views={componentsViews}
+          onButtonClick={closeModal}
+          id={cardId}
+        />
+      )}
     </Fragment>
   );
 };
