@@ -9,10 +9,10 @@ const Card = styled.div`
   border: 1px solid lightgray;
   width: 250px;
   padding: 1rem 1.5rem;
-  cursor: pointer;
+  cursor: ${(props) => (props.modalActive ? "default" : "pointer")};
 
   &:hover {
-    background-color: #e5e7eb;
+    background-color: ${(props) => (props.modalActive ? "#e5e7eb" : "#f9fafb")};
   }
 `;
 
@@ -70,7 +70,6 @@ const LocationCard = ({
     // Accessibility needs to be optimized
     <Card
       as={htmlTag}
-      role=""
       onClick={onCardClick ? () => onCardClick(id) : undefined}
     >
       <CardTitle> {name} </CardTitle>

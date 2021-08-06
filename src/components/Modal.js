@@ -24,7 +24,7 @@ const Modal = ({ card }) => {
   return (
     <Fragment>
       {ReactDOM.createPortal(
-        <ModalOverlay>
+        <ModalOverlay role="dialog">
           <CenteredCard>{card}</CenteredCard>
         </ModalOverlay>,
         document.getElementById("modal")
