@@ -2,7 +2,7 @@
 
 git clone https://github.com/Nuno111/Tymeshift.git
 
-cd Tyhemshift
+cd Tymeshift
 
 npm install
 
