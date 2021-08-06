@@ -20,7 +20,7 @@ const Card = styled.div`
 
   &:hover {
     svg {
-      display: block;
+      opacity: 1;
     }
 
     background-color: ${({ modalActive }) =>
@@ -39,7 +39,7 @@ const CardTitle = styled.div`
   }
 
   svg {
-    display: ${({ modalActive }) => (modalActive ? "block" : "none")};
+    opacity: ${({ modalActive }) => (modalActive ? "1" : "0")};
     cursor: pointer;
   }
 `;
